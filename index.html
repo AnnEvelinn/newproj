@@ -57,14 +57,36 @@
 </head>
 <body>
     <div class="container">
-        <h1>Yasss Queen!</h1>
+        <h1>Rock Paper Scissors!</h1>
         <p>
-            Yepp, I did it again...<br>
-            Yayyyyy queen and princess<br>
-            Yayyyyy queen and king<br>
-            Yeppp, I'm learning each day
+            Let's play a fun game! Choose your move below:
         </p>
-        <button class="btn" onclick="alert('Keep shining, queen! 👑')">Celebrate!</button>
+        <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 24px;">
+            <button class="btn" onclick="playGame('rock')" aria-label="Rock" style="font-size:1.5rem;">🪨<br>Rock</button>
+            <button class="btn" onclick="playGame('paper')" aria-label="Paper" style="font-size:1.5rem;">📄<br>Paper</button>
+            <button class="btn" onclick="playGame('scissors')" aria-label="Scissors" style="font-size:1.5rem;">✂️<br>Scissors</button>
+        </div>
+        <div id="result" style="font-size:1.2rem; color:#43c6ac; min-height:40px;"></div>
     </div>
+    <script>
+        function playGame(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const emojis = { rock: '🪨', paper: '📄', scissors: '✂️' };
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = '';
+            if (playerChoice === computerChoice) {
+                result = `It's a tie! You both chose ${emojis[playerChoice]}`;
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = `You win! ${emojis[playerChoice]} beats ${emojis[computerChoice]}`;
+            } else {
+                result = `Oops! Computer wins! ${emojis[computerChoice]} beats ${emojis[playerChoice]}`;
+            }
+            document.getElementById('result').textContent = result;
+        }
+    </script>
 </body>
 </html>
